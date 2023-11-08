@@ -1,0 +1,18 @@
+
+
+.mensajeExito{
+    width: auto;
+    margin: auto;
+    text-align: center;
+    background-color: darkseagreen;
+
+}
+
+.mensajeError{
+    width: auto;
+    margin: auto;
+    text-align: center;
+    background-color: indianred ;
+    border-color: black;
+}
+
