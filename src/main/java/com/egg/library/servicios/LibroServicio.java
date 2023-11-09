@@ -46,6 +46,7 @@ public class LibroServicio {
         libros = libroRepositorio.findAll();
         return libros;
     }
+    @Transactional
     public void modificarlibro(Long isbn, String titulo, String idAutor, String idEditorial, Integer ejemplares) throws MiException {
 
         validar(isbn, titulo, ejemplares, idAutor, idEditorial);
@@ -74,6 +75,9 @@ public class LibroServicio {
             libroRepositorio.save(libro);
 
         }
+    }
+    public Libro getOne(Long isbn){
+        return libroRepositorio.getOne(isbn);
     }
     private void validar(Long isbn, String titulo, Integer ejemplares, String idAutor, String idEditorial) throws MiException{
         if(isbn == null){

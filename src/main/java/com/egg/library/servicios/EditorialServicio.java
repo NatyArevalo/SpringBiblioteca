@@ -18,7 +18,10 @@ public class EditorialServicio {
 
     @Transactional //Todos los metodos que generen cambios en la base de datos deben ser listados como transactional
     //En caso de arrojar una excepción, se ejecutara un rollback y no habran cambios en la BD
-    public void crearEditorial(String nombre){
+    public void crearEditorial(String nombre) throws MiException {
+        if(nombre == null || nombre.isEmpty()){
+            throw new MiException("El nombre no puede ser nulo o estar vacio");
+        }
         Editorial editorial = new Editorial();
         editorial.setNombre(nombre);
         editorialRepositorio.save(editorial);
@@ -28,7 +31,9 @@ public class EditorialServicio {
         editoriales = editorialRepositorio.findAll();
         return editoriales;
     }
-    public void modificareditorial(String nombre, String id){
+    @Transactional
+    public void modificareditorial(String nombre, String id) throws MiException {
+        validar(nombre, id);
         Optional<Editorial> respuesta = editorialRepositorio.findById(id);
         if (respuesta.isPresent()){
             Editorial editorial = respuesta.get();
@@ -36,6 +41,9 @@ public class EditorialServicio {
 
             editorialRepositorio.save(editorial);
         }
+    }
+    public Editorial getOne(String id){
+        return editorialRepositorio.getOne(id);
     }
     public void validar(String nombre, String id) throws MiException {
         if(id == null || id.isEmpty()){

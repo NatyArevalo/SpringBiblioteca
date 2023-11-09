@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Modificación de Libros</title>
+  <link href="https://stackpath.bootstrap.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+<header>
+  <div class = "container">
+    <h2>Modifica el libro aqui</h2>
+  </div>
+</header>
+<div class="container">
+  <form class= "formulario" th:action="@{/libro/modificar/__${libro.isbn}__}" method="post">
+
+    <input hidden th:value="${isbn}" name id>
+    <div class="form-group">
+      <input th:value="${libro.titulo}" type="text" class="form-group" name="titulo" placeholder="Titulo del libro">
+    </div>
+    <div class="form-group">
+      <input th:value="${libro.ejemplares}" type="number" class="form-group" name= "ejemplares" placeholder="Ejemplares">
+    </div>
+    <div class="form-group">
+
+      <select name="idAutor">
+
+        <option>Seleccionar Autor</option>
+
+        <option th:each="autor : ${autores}"
+                th:value="${autor.id}"
+                th:text="${autor.nombre}"
+        />
+      </select>
+    </div>
+    <div class="form-group">
+      <select name="idEditorial">
+        <option>Seleccionar Editorial</option>
+        <option th:each="editorial : ${editoriales}"
+                th:value="${editorial.id}"
+                th:text="${editorial.nombre}"
+        />
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary"> Actualizar </button>
+  </form>
+  <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
+    <div class = "card-body">
+      <h5 class="card title"> Error </h5>
+      <p class="card text" th:text="${error}"></p>
+    </div>
+  </div>
+  <div th:if="${exito != null}" class="card text-white bg-success mb-3 mt-3 mensajeExito">
+    <div class = "card-body">
+      <h5 class="card title"> Exito! </h5>
+      <p class="card text" th:text="${exito}"> </p>
+    </div>
+  </div>
+  <section class=" text-center container">
+    <div class="row mt-3">
+      <div class="divVolver">
+        <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+      </div>
+    </div>
+  </section>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>

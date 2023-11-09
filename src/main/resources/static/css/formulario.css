@@ -15,4 +15,27 @@
     background-color: indianred ;
     border-color: black;
 }
+.divVolver{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    margin: auto;
+}
+
+.botonVolver{
+    width: 5%;
+}
+
+.botones{
+    box-shadow: 0px 2px 16px 4px rgba(0,0,0,0.36);
+    -webkit-box-shadow: 0px 2px 16px 4px rgba(0,0,0,0.36);
+    -moz-box-shadow: 0px 2px 16px 4px rgba(0,0,0,0.36);
+}
+
+.botones:active{
+    box-shadow: none;
+}
+
+
 

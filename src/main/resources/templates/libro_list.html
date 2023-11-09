@@ -17,6 +17,7 @@
             <th scope="col"> Ejemplares</th>
             <th scope="col"> Autor</th>
             <th scope="col"> Editorial</th>
+            <th scope="col"> Acciones</th>
         </tr>
         </thead>
         <tbody th:each="libro :  ${libros}">
@@ -26,7 +27,9 @@
             <td th:text="${libro.ejemplares}"></td>
             <td th:text="${libro.autor.nombre}"></td>
             <td th:text="${libro.editorial.nombre}"></td>
-            <td></td>
+            <td>
+                <a th:href="@{/libro/modificar/__${libro.isbn}__}"><i class="fas fa-feather-alt"></i>Modificar</a>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -42,6 +45,13 @@
             <p class="card text" th:text="${exito}"> </p>
         </div>
     </div>
+    <section class=" text-center container">
+        <div class="row mt-3">
+            <div class="divVolver">
+                <a th:href="@{/}" class="btn btn-secondary my-2 botonVolver botones">Volver</a>
+            </div>
+        </div>
+    </section>
 </div>
 </body>
 </html>

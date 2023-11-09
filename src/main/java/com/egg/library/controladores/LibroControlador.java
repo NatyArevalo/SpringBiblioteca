@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -61,5 +58,21 @@ public class LibroControlador {
         List<Libro> libros = libroServicio.listarlibros();
         modelo.addAttribute("libros", libros);
         return "libro_list.html";
+    }
+    @GetMapping("/modificar/{isbn}")
+    public String modificar(@PathVariable Long isbn, ModelMap modelo){
+        modelo.put("libro", libroServicio.getOne(isbn));
+        return "libro_modificar.html";
+    }
+    @PostMapping("/modificar/{isbn}")
+    public String modificar(@PathVariable Long isbn, String titulo, Integer ejemplares, String idAutor, String idEditorial,
+                            ModelMap modelo){
+        try{
+            libroServicio.modificarlibro(isbn, titulo, idAutor, idEditorial, ejemplares);
+            return "redirect:../lista";
+        } catch (MiException e) {
+            modelo.put("error", e.getMessage());
+            return "libro_modificar.html";
+        }
     }
 }
